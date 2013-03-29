@@ -1,0 +1,11 @@
+sinatra
+
+rabl
+datamapper | sequel
+
+https://github.com/mifo/deltacloud/blob/master/server/lib/deltacloud/api.rb -> this is our secret library code :)
+https://github.com/mifo/deltacloud/blob/master/server/tests/drivers/base/library_test.rb -> and how to use it :)
+
+
+create, start, stop, delete
+list_images

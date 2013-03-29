@@ -1,0 +1,74 @@
+Accessing the Broker
+====================
+
+The broker provides:
+
+  * an API interface than can be used from other Ruby projects,
+  * a REST interface to the config part of
+    the API
+  * a IaaS API interface through the Deltacloud
+
+    REST config API       IaaS API (CIMI, DC API)
+   +--------------+        +-------------------+
+   | REST Adapter |        | Deltacloud Driver |
+ +----------------------------------------------+
+ |  Broker                                      |
+ +--------------+-------------+-----------------+
+ | Config store | State store |         |
+ +--------------+-------------+         |
+          | State Tracker |             |
+          +---------------+             |
+                  +                     |
+                  |                     V
+                  ----------------> Deltacloud  -----------> Cloud providers
+                                                           public and private
+
+The broker is stateful and it's state store consists of 2 components.
+
+  * configuration store,
+  * instance store.
+
+Configuration store contains the infrormation about pools (virtual clouds),
+pool families, providers, provider accounts, backend hardware profiles etc.
+
+The IaaS interface allows the broker client to use the Broker as any other
+cloud provider using the same API calls.
+
+Broker needs to track the state of instances that it manages. For that purpose
+the Broker includes a Tracker component. This component is responsible for
+keeping the "State store" up-to-date.
+
+Because all the API calls return immediately keeping the state database up to
+date is crucial for correct function of the broker. The Tracker component can
+use polling as wall as callback features once these are available through DC.
+
+
+Image Mapping
+=============
+
+The broker does not want to deal with image management. Yet to launch an
+instance one needs to specify an image ID.
+
+Also as each pool is a virtual cloud and from client point of view (such as HEAT) we
+need to enumerate images.
+
+So we need to know about images. And on top of that from the point of view of
+provider selection we also need to know about the provider images.
+
+Given we want to be able to user the Broker in various scenarios (standalone,
+with ImageFactory, inside a host application) we need to be able to delegate t
+
+Therefor we design a simple interface for mapping that maps our image names to
+provider images and have an abitily to swap this interface in various scenarios.
+
+Standalone deployment of the broker will use a a simple mapping function:
+(broker_image, provider_account) ==> provider_image, this will be implemented
+by a simple entity and collection (REST) API.
+
+When used with ImageFactory or inside a host application, this function will be
+implemented by a custom class that plugs into the broker.
+
+
+
+
+

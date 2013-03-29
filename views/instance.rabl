@@ -1,0 +1,2 @@
+object @instance
+extends 'instances'

@@ -1,0 +1,2 @@
+object @provider
+extends 'providers'

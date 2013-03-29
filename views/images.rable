@@ -1,0 +1,2 @@
+collection @images
+attributes :broker_image_id, :provider_image_id, :provider_id

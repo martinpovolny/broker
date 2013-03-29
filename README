@@ -1,0 +1,33 @@
+Broker POC
+==========
+
+This project aims to implement a POC for a cloud broker as presented here: [1]
+and [2].
+
+The schema of the Broker is the variant 2 from [2].
+
+POC consists of:
+
+* deltacloud driver 'broker' that exposes the IaaS part of Broker functionality
+* REST interface for the configuration part of Broker functionality
+
+Instalation:
+------------
+The only database tested is postgresql. To populate the database schema run the
+migrations in Rakefile.
+
+To get the Broker running you need to have a version of deltacloud library that
+allows the pseudo-library functionality using Faraday.
+
+Then you need to link the dc-driver directory from the broker into
+deltacloud-core like this:
+
+ln -s path_to/broker/lib/dc-driver/ path_to/deltacloud-core-1.1.3/lib/deltacloud/drivers/
+
+Next steps:
+-----------
+* make HEAT running on top of Deltacloud [3] run using the Broker driver.
+
+[1] http://blog.aeolusproject.org/broker/
+[2] https://github.com/aeolusproject/conductor/wiki/BrokerProject.
+[3] https://github.com/aeolusproject/conductor/pull/424
