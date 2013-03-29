@@ -1,0 +1,16 @@
+JS directly consuming the API
+
+creates uncrossable border between API implementation and the client (browser, js)
+
+vs
+
+thin controllers consuming the API
+serving it in the form  best for the client
+
+uncrossable border between API and the controller
+more discipline
+
+
+vs mixed together business and presentation logic (and storage)
+
+like belief in god, good to deal with such people because they worship certain values (testimony), but does not make me a believer
